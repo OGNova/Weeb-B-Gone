@@ -9,7 +9,7 @@ const client = new BaseClient({
   partials: ['MESSAGE', 'CHANNEL'],
   ws: { intents: myIntents }
 });
+createLogger(client);
 global.bot = client;
 
 init(client, process.env.PROD_TOKEN).catch(e => console.log(e));
-createLogger(client);

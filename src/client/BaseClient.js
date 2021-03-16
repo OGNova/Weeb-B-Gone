@@ -9,7 +9,7 @@ const path = require('path');
 
 require('../util/Prototypes');
 
-class WeebBGone extends Client {
+class BaseClient extends Client {
   constructor(options) {
     super(options);
     
@@ -27,4 +27,4 @@ class WeebBGone extends Client {
   }
 }
 
-module.exports = WeebBGone;
+module.exports = BaseClient;

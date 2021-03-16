@@ -20,12 +20,7 @@ class Message extends Event {
     
     const prefix = '__'
 
-    if (message.content.includes('uwu') || message.content.includes('owo') || message.content.includes('waifu')) {
-      message.reply('get back to the dungeon you weeb!')
-      return message.delete();
-    }
-    // if (!prefix) return;
-    if (!prefix && !message.content.includes('kyoko')) return;
+    if (!prefix) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
