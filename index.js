@@ -5,7 +5,6 @@ const createLogger = require('./src/client/GlobalLogger');
 const myIntents = ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"];
 
 const client = new BaseClient({
-  fetchAllMembers: true,
   partials: ['MESSAGE', 'CHANNEL'],
   ws: { intents: myIntents }
 });
