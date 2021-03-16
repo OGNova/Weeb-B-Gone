@@ -24,7 +24,7 @@ class Ready extends Event {
     await this.client.channels.cache.get('723437000686043146').send({ embed });
 
     this.client.logger.login(`Logged in as ${this.client.user.username}`);
-    this.client.user.setActivity(`__help | ${this.client.guilds.cache.size} Servers`)
+    this.client.user.setActivity(`__help | ${this.client.guilds.cache.size} Servers`);
 
     // await this.client.wait(1000);
   }

@@ -18,7 +18,7 @@ class Message extends Event {
     message.author.permLevel = level;
     
     
-    const prefix = '__'
+    const prefix = '__';
 
     if (!prefix) return;
 

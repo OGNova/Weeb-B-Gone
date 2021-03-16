@@ -11,8 +11,8 @@ class Exec extends Command {
 
   async run(message, args, level) {
     exec(args.join(' '), {}, (err, stdout, stderr) => {
-        if (err) return message.channel.send(err.message, { code: 'asciidoc' });
-        message.channel.send(stdout, { code: 'asciidoc' });
+      if (err) return message.channel.send(err.message, { code: 'asciidoc' });
+      message.channel.send(stdout, { code: 'asciidoc' });
     });
   }
 }
