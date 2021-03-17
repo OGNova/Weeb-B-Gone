@@ -7,11 +7,9 @@ module.exports = Structures.extend('Message', Message => class extends Message {
     this.channel.send(content);
   }
 
-  async respond(content, emoji, embed, options = {}) {
-    emoji = emoji ? constants.emojis[emoji] : constants.emojis['xmark'];
-    const emote = await this.client.emojis.resolve(emoji);
+  async commandFail(content, embed, options = {}) {
     if (embed && typeof(embed) !== Boolean) return new Error('Type of embed must be a boolean.');
-    this.channel.send(`${this.author}, \`|\`<:${emote.name}:${emote.id}>\`|\` ${content}`, embed);
+    this.channel.send(`${this.author}, \`|\`<:redTick:607067960430952459>\`|\` ${content}`, embed);
   }
 
   async awaitReply(question, filter, limit = 60000, embed) {
