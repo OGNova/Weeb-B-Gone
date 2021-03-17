@@ -19,7 +19,7 @@ class Reload extends Command {
 
       response = loadCommand(this.client, command.conf.location, command.help.name);
       if (response) return message.reply(`Error loading: ${response}`);
-      return message.respond(`The module \`${command.help.name}\` was reloaded.`, 'checkmark');
+      return message.respond(`The module \`${command.help.name}\` was reloaded.`, 'greenTick');
     }
 
     if (!command) {

@@ -18,4 +18,11 @@ module.exports = Structures.extend('Message', Message => class extends Message {
       .then(collected => collected.first().content)
       .catch(() => false);
   }
+
+  async respond(content, emoji, embed, options = {}) {
+    emoji = emoji ? constants.emojis[emoji] : constants.emojis['redTick'];
+    const emote = await this.client.emojis.resolve(emoji);
+    if (embed && typeof(embed) !== Boolean) return new Error('Type of embed must be a boolean.');
+    this.channel.send(`${this.author}, \`|\`<:${emote.name}:${emote.id}>\`|\` ${content}`, embed);
+  }
 });
