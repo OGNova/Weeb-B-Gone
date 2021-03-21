@@ -1,14 +1,4 @@
-async function embedSan(embed) {
-  embed.message ? delete embed.message : null;
-  embed.footer ? delete embed.footer.embed : null;
-  embed.provider ? delete embed.provider.embed : null;
-  embed.thumbnail ? delete embed.thumbnail.embed : null;
-  embed.image ? delete embed.image.embed : null;
-  embed.author ? delete embed.author.embed : null;
-  embed.fields ? embed.fields.forEach(f => {delete f.embed;}) : null;
-  return embed;
-}
-
+const { MessageEmbed } = require('discord.js');
 const Command = require('../../lib/structures/Command');
 
 class Reason extends Command {
@@ -34,9 +24,16 @@ class Reason extends Command {
       ).first();
       modlog.messages.fetch(caseLog.id).then(logMsg => {
         const embed = logMsg;
-        embedSan(embed);
-        embed.description = embed.description.replace(`Awaiting moderator's input. Use __reason ${caseNumber} <reason>.`, newReason);
-        logMsg.edit({embed});
+        
+        const oldEmbed = embed.embeds[0];
+        const oldEmbedDesc = embed.embeds[0].description.split('\n');
+        
+        const newLogEmbed = new MessageEmbed()
+          .setTimestamp(oldEmbed.timestamp)
+          .setColor(oldEmbed.color)
+          .setDescription(`${oldEmbedDesc[0]}\n${oldEmbedDesc[1]}\n${oldEmbedDesc[2]}\n**Reason:** ${newReason}`)
+          .setFooter(`Case ${caseNum}`)
+        logMsg.edit({ embed: newLogEmbed });
       });
     });
   }
