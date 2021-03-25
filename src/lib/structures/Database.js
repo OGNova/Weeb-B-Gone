@@ -10,20 +10,32 @@ module.exports.connect = function() {
   console.log(chalk`{bold.green DEBUG:} Opening connection to database.`);
   connection.connect();
   this.query(
-    'CREATE TABLE IF NOT EXISTS guilds (    \
-      "id" BIGSERIAL PRIMARY KEY,           \
-      "name" TEXT,                          \
-      "owner" BIGSERIAL,                    \
-      "infCount" INT                        \
-      );'
+    'CREATE TABLE IF NOT EXISTS guilds (      \
+      "id" BIGSERIAL PRIMARY KEY,             \
+      "name" TEXT,                            \
+      "owner" BIGSERIAL,                      \
+      "infCount" INT                          \
+    );'
   );
 
   this.query(
-    'CREATE TABLE IF NOT EXISTS members (   \
-      "id" BIGSERIAL PRIMARY KEY,           \
-      "name" TEXT,                          \
-      "infractions" JSON                    \
-      );'
+    'CREATE TABLE IF NOT EXISTS members (     \
+      "id" BIGSERIAL PRIMARY KEY,             \
+      "name" TEXT,                            \
+    );'
+  );
+  
+  this.query(
+    'CREATE TABLE IF NOT EXISTS infractions ( \
+      "id" INT PRIMARY KEY,                   \
+      "user" BIGSERIAL,                       \
+      "guild_id" BIGSERIAL,                   \
+      "actor_id" BIGSERIAL,                   \
+      "reason" TEXT,                          \
+      "type" TEXT,                            \
+      "createdAt" DATETIME,                   \
+      "active" BOOLEAN                        \
+    );'
   );
 
   console.log(chalk`{bold.green DEBUG:} Done. Starting bot.`);
@@ -70,6 +82,15 @@ module.exports.addMember = function(id, name) {
   return connection.query(addMemberQuery);
 };
 
+
+module.exports.createInfraction = function(id, user, guild_id, actor_id, reason, type, createdAt, active) {
+  const createInfractionQuery = {
+    text: 'INSERT INTO infractions (id, user, guild_id, actor_id, reason, type, createdAt, active' +
+            'VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+    values: [id, user, guild_id, actor_id, reason, type, createdAt, active]
+  };
+  return connection.query(createInfractionQuery);
+};
 
 // Helper Queries
 
