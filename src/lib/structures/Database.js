@@ -10,17 +10,19 @@ module.exports.connect = function() {
   console.log(chalk`{bold.green DEBUG:} Opening connection to database.`);
   connection.connect();
   this.query(
-    'CREATE TABLE IF NOT EXISTS guilds ( \
-      "id" BIGSERIAL PRIMARY KEY,          \
-      "name" TEXT,                         \
-      "owner" BIGSERIAL,                   \
+    'CREATE TABLE IF NOT EXISTS guilds (    \
+      "id" BIGSERIAL PRIMARY KEY,           \
+      "name" TEXT,                          \
+      "owner" BIGSERIAL,                    \
+      "infCount" INT                        \
       );'
   );
 
   this.query(
-    'CREATE TABLE IF NOT EXISTS members ( \
+    'CREATE TABLE IF NOT EXISTS members (   \
       "id" BIGSERIAL PRIMARY KEY,           \
-      "name" TEXT                           \
+      "name" TEXT,                          \
+      "infractions" JSON                    \
       );'
   );
 
