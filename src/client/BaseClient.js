@@ -23,6 +23,8 @@ class BaseClient extends Client {
       haste: new Haste()
     };
 
+    this.db = require('../lib/structures/Database');
+
     this.wait = require('util').promisify(setTimeout);
   }
 }

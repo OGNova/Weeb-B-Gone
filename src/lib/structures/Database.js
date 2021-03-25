@@ -60,7 +60,7 @@ module.exports.removeServer = function(id) {
   };
   return connection.query(removeServerQuery);
 };
-  
+
   
 module.exports.getServer = function(id) {
   const getServerQuery = {
