@@ -13,9 +13,6 @@ class Warn extends Command {
   }
 
   async run(message, args) {
-    let action;
-    let embedColor;
-
     const user = message.mentions.users.first();
     const member = message.guild.member(user);
 
@@ -35,6 +32,8 @@ class Warn extends Command {
       .setFooter(`Case ${caseNum}`);
 
     this.client.channels.cache.get(modlog.id).send({ embed: logEmbed });
+
+    await this.client.db.createInfraction(caseNum, member.user.id, message.author.id, reason, 'warning', new Date(), true)
   }
 }
 
