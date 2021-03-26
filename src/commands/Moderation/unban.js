@@ -31,6 +31,7 @@ class Unban extends Command {
         .setFooter(`Case ${caseNum}`);
 
       this.client.channels.cache.get(modlog.id).send({ embed: logEmbed });
+      await this.client.db.deactivateInfraction(caseNum, false)
     });
   }
 }

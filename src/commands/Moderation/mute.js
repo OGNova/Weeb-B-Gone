@@ -54,6 +54,7 @@ class Mute extends Command {
     } else {
       member.roles.add(muteRole);
     }
+    await this.client.db.createInfraction(caseNum, member.user.id, message.author.id, reason, 'mute', new Date(), true)
   }
 }
 

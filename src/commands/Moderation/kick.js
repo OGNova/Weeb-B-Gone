@@ -33,6 +33,7 @@ class Kick extends Command {
 
     this.client.channels.cache.get(modlog.id).send({ embed: logEmbed });
     member.kick(reason);
+    await this.client.db.createInfraction(caseNum, member.user.id, message.author.id, reason, 'kick', new Date(), true)
   }
 }
 

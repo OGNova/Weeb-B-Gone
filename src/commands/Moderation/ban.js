@@ -38,6 +38,7 @@ class Ban extends Command {
 
     this.client.channels.cache.get(modlog.id).send({ embed: logEmbed });
     member.ban({ days: `${deleteDays}`, reason });
+    await this.client.db.createInfraction(caseNum, member.user.id, message.author.id, reason, 'ban', new Date(), true)
   }
 }
 

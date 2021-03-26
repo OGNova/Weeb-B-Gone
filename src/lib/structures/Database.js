@@ -108,6 +108,14 @@ module.exports.deleteInfraction = function(id) {
   return connection.query(deleteInfractionQuery);
 };
 
+module.exports.deactivateInfraction = function(id, active) {
+  const deactivateInfractionQuery = {
+    text: 'UPDATE infractions SET active = $2 WHERE id = $1',
+    values: [id, active]
+  };
+  return connection.query(deactivateInfractionQuery);
+};
+
 // Helper Queries
 
 module.exports.query = function(rawSQL) {
