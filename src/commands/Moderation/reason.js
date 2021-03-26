@@ -34,6 +34,8 @@ class Reason extends Command {
           .setDescription(`${oldEmbedDesc[0]}\n${oldEmbedDesc[1]}\n${oldEmbedDesc[2]}\n**Reason:** ${newReason}`)
           .setFooter(`Case ${caseNum}`);
         logMsg.edit({ embed: newLogEmbed });
+
+        await this.client.db.updateInfractionReason(caseNum, newReason);
       });
     });
   }

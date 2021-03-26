@@ -86,10 +86,26 @@ module.exports.addMember = function(id, name) {
 module.exports.createInfraction = function(id, user, guild_id, actor_id, reason, type, createdAt, active) {
   const createInfractionQuery = {
     text: 'INSERT INTO infractions (id, user, guild_id, actor_id, reason, type, createdAt, active' +
-            'VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+          'VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
     values: [id, user, guild_id, actor_id, reason, type, createdAt, active]
   };
   return connection.query(createInfractionQuery);
+};
+
+module.exports.updateInfractionReason = function(id, reason) {
+  const updateInfractionReasonQuery = {
+    text: 'UPDATE infractions SET reason = $2 WHERE id = $1',
+    values: [id, reason]
+  };
+  return connection.query(updateInfractionReasonQuery);
+};
+
+module.exports.deleteInfraction = function(id) {
+  const deleteInfractionQuery = {
+    text: 'DELETE FROM infractions WHERE id = $1',
+    values: [id]
+  };
+  return connection.query(deleteInfractionQuery);
 };
 
 // Helper Queries
