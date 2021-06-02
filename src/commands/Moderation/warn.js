@@ -33,7 +33,7 @@ class Warn extends Command {
 
     this.client.channels.cache.get(modlog.id).send({ embed: logEmbed });
 
-    await this.client.db.createInfraction(caseNum, member.user.id, message.author.id, reason, 'warning', new Date(), true)
+    await this.client.db.createInfraction(caseNum, member.user.id, message.author.id, reason, 'warning', new Date(), true);
   }
 }
 
